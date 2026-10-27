@@ -1,0 +1,39 @@
+; ─────────────────────────────────────────────────────────────
+;  QuizBot — systemd unit  (place at /etc/systemd/system/quizbot.service)
+;
+;  Edit User=, WorkingDirectory= and EnvironmentFile= to match
+;  your VPS, then:
+;     sudo systemctl daemon-reload
+;     sudo systemctl enable --now quizbot
+;
+;  Logs:    journalctl -u quizbot -f
+;  Restart: sudo systemctl restart quizbot
+; ─────────────────────────────────────────────────────────────
+[Unit]
+Description=QuizBot (Pyrogram main + PTB scheduler)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=quizbot
+Group=quizbot
+WorkingDirectory=/opt/quizbot
+EnvironmentFile=/opt/quizbot/.env
+ExecStart=/opt/quizbot/.venv/bin/python web.py
+Restart=always
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=15
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=quizbot
+
+; Hardening (safe defaults — comment out if anything misbehaves)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

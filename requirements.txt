@@ -1,0 +1,99 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║         QUIZBOT — Python Dependencies                        ║
+# ╚══════════════════════════════════════════════════════════════╝
+# Install: pip install -r requirements.txt
+#
+# Tested on Python 3.12.
+
+# ── Telegram clients ─────────────────────────────────────────
+pyrogram==2.0.106          # main.py — quiz creation & management bot
+TgCrypto==1.2.5            # required by pyrogram (fast crypto)
+python-telegram-bot>=21.0,<22  # bot.py  — quiz scheduler / poll runner
+
+# ── Database ─────────────────────────────────────────────────
+pymongo==4.6.1             # sync MongoDB driver (ships its own bson)
+motor==3.3.2               # async MongoDB driver
+PyMySQL==1.1.0             # MySQL connector (web panel sync)
+
+# ── Async & HTTP ─────────────────────────────────────────────
+aiohttp==3.9.3
+aiofiles==23.2.1
+requests==2.31.0
+
+# ── HTML / text parsing ──────────────────────────────────────
+beautifulsoup4==4.12.3
+lxml==5.1.0
+
+# ── Image processing ─────────────────────────────────────────
+Pillow==10.2.0
+
+# ── Math / LaTeX ─────────────────────────────────────────────
+sympy==1.12
+
+# ── Crypto ───────────────────────────────────────────────────
+pycryptodome==3.20.0       # AES quiz file encryption
+
+# ── Text utilities ───────────────────────────────────────────
+Unidecode==1.3.8
+python-dotenv==1.0.1
+
+# ── PDF generation (Mock-test export) ────────────────────────
+fpdf2==2.8.7               # NOTE: do NOT install legacy `fpdf` alongside fpdf2
+uharfbuzz>=0.39.0          # Devanagari / Hindi text shaping (matra positioning)
+pypdf>=4.0.0               # Extract text from .pdf uploads in /create flow
+pymupdf>=1.24.0            # Rasterize scanned PDF pages → images for OCR fallback
+
+# ── Web scraping (Playwright — PDF / quiz extraction) ────────
+playwright==1.42.0
+
+# ── AI question generation (Replit AI Integrations — Gemini) ─
+google-genai>=1.20.0
+crypto
+motor
+pymongo
+pyrogram
+telegram
+aiofiles==23.2.1
+aiohttp==3.9.3
+beautifulsoup4==4.12.3
+fpdf2==2.8.7
+google-genai>=1.20.0
+lxml==5.1.0
+motor==3.3.2
+Pillow==10.2.0
+playwright==1.42.0
+pycryptodome==3.20.0
+pymongo==4.6.1
+pymupdf>=1.24.0
+PyMySQL==1.1.0
+pypdf>=4.0.0
+pyrogram==2.0.106
+python-dotenv==1.0.1
+python-telegram-bot>=21.0,<22
+requests==2.31.0
+sympy==1.12
+TgCrypto==1.2.5
+uharfbuzz>=0.39.0
+Unidecode==1.3.8
+aiofiles==23.2.1
+aiohttp==3.9.3
+beautifulsoup4==4.12.3
+fpdf2==2.8.7
+google-genai>=1.20.0
+lxml==5.1.0
+motor==3.3.2
+Pillow==10.2.0
+playwright==1.42.0
+pycryptodome==3.20.0
+pymongo==4.6.1
+pymupdf>=1.24.0
+PyMySQL==1.1.0
+pypdf>=4.0.0
+pyrogram==2.0.106
+python-dotenv==1.0.1
+python-telegram-bot>=21.0,<22
+requests==2.31.0
+sympy==1.12
+TgCrypto==1.2.5
+uharfbuzz>=0.39.0
+Unidecode==1.3.8

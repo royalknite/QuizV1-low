@@ -1,0 +1,85 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║   QUIZBOT — Render Blueprint                                 ║
+# ║                                                              ║
+# ║   Deploy by linking this repo to Render and choosing         ║
+# ║   "Use Render Blueprint" — it will create the service        ║
+# ║   automatically.                                             ║
+# ║                                                              ║
+# ║   You'll still need to add your secrets (API_ID, API_HASH,   ║
+# ║   BOT_TOKEN, MONGO_URI, MONGO_URI_2, MONGO_URIX, OWNER_ID)   ║
+# ║   in the Render dashboard → Environment.                     ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+services:
+  - type: web
+    name: quizbot
+    runtime: python
+    plan: free            # bump to starter/standard for 24/7 without idling
+    region: oregon        # change to your nearest region (oregon | frankfurt | singapore | ohio | virginia)
+    branch: main
+    autoDeploy: true
+
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python web.py
+
+    healthCheckPath: /
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.5
+
+      # ── Required secrets — set real values in the Render dashboard ──
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_URI_2
+        sync: false
+      - key: MONGO_URIX
+        sync: false
+      - key: OWNER_ID
+        sync: false
+
+      # ── Optional ──
+      - key: BOT_TOKEN_2
+        sync: false
+      - key: LOG_GROUP
+        value: "0"
+      - key: FORCE_SUB
+        value: "0"
+      - key: BOT_GROUP
+        value: "0"
+      - key: CHANNEL_ID
+        value: "0"
+      - key: DB_NAME
+        value: quiz_bot
+      - key: FREEMIUM_LIMIT
+        value: "0"
+      - key: PREMIUM_LIMIT
+        value: "500"
+      - key: FREE_BOT
+        value: "true"
+
+      # ── Self-ping (anti-sleep on free plan) ──
+      # Leave PING_URL blank — Render auto-injects RENDER_EXTERNAL_URL.
+      # Override only if you want to ping a different URL (e.g. a custom domain).
+      - key: PING_URL
+        sync: false
+      - key: PING_INTERVAL_SECONDS
+        value: "240"
+
+      # ── Bandwidth guard (free 5 GB plan) ──
+      # Daily budget in MB for the estimate shown by /bw (owner only).
+      # 5 GB * 0.95 / 31 days = ~150 MB.
+      - key: BW_DAILY_BUDGET_MB
+        value: "150"
+      # Optional: set to (Render dashboard usage / /bw number) after a day, e.g. 1.3
+      - key: BW_CALIBRATION
+        value: "1.0"
+      # Private quizzes: drop per-user explanation/promo (biggest saver). "false" = keep them.
+      - key: BW_PRIVATE_LEAN
+        value: "true"
